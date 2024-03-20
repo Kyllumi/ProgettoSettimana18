@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Reservation;
 use App\Http\Requests\StoreReservationRequest;
 use App\Http\Requests\UpdateReservationRequest;
+use Auth;
+use Database\Factories\CourseFactory;
 
 class ReservationController extends Controller
 {
@@ -13,7 +16,17 @@ class ReservationController extends Controller
      */
     public function index()
     {
-        //
+        $user = Auth::user();
+
+        if ($user->is_admin == 1) {
+            $reservations = Reservation::with('course', 'user')->get();
+            return view('admin_reservations', ['reservations' => $reservations, 'user' => $user]);
+
+        } else {
+            $reservations = Reservation::where('user_id', $user->id)->with('course', 'user')->get();
+            return view('user_reservations', ['reservations' => $reservations, 'user' => $user]);
+
+        }
     }
 
     /**
@@ -61,6 +74,7 @@ class ReservationController extends Controller
      */
     public function destroy(Reservation $reservation)
     {
-        //
+        $reservation->delete();
+        return redirect()->back()->with('success', 'Prenotazione eliminata con successo.');
     }
 }
