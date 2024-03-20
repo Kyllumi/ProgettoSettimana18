@@ -45,7 +45,8 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        return view('course_detail', ['course' => $course]);
+        $user = Auth::user();
+        return view('course_detail', ['course' => $course], ['user' => $user]);
     }
 
     /**
