@@ -11,6 +11,9 @@ class Course extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title', 'description', 'date', 'start_time', 'end_time'];
+
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
@@ -19,4 +22,5 @@ class Course extends Model
         return $this->hasMany(Reservation::class);
     }
     
+
 }

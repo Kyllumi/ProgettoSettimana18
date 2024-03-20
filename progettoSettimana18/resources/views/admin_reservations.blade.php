@@ -36,9 +36,19 @@
                                         @endif
                                         <td>
                                             @if($reservation->is_pending == 1)
-                                            <a type="button" class="btn btn-outline-success my-2 w-100" href="/reservations/{{$reservation->id}}">Conferma</a>
+                                            <form method="POST" action="{{ route('reservations.update', $reservation->id) }}" onsubmit="return confirm('Confermare questa prenotazione?');">
+                                                @csrf
+                                                @method('PUT')
+                                                <input type="hidden" name="is_pending" value="0">
+                                                <button type="submit" class="btn btn-outline-success my-2 w-100">Conferma</button>
+                                            </form>
                                             @else 
-                                            <a type="button" class="btn btn-outline-warning my-2 w-100" href="/reservations/{{$reservation->id}}">Annulla</a>
+                                            <form method="POST" action="{{ route('reservations.update', $reservation->id) }}" onsubmit="return confirm('Annullare questa prenotazione?');">
+                                                @csrf
+                                                @method('PUT')
+                                                <input type="hidden" name="is_pending" value="1">
+                                                <button type="submit" class="btn btn-outline-dark my-2 w-100">Annulla</button>
+                                            </form>
                                             @endif
                                             <form method="POST" action="{{ route('reservations.destroy', $reservation->id) }}" onsubmit="return confirm('Sei sicuro di voler eliminare questa prenotazione?');">
                                                 @csrf

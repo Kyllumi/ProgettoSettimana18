@@ -29,7 +29,8 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        $user = Auth::user();
+        return view('course_create', ['user' => $user]);
     }
 
     /**
@@ -37,7 +38,23 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
-        //
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'date' => 'required|string',
+            'start_time' => 'required|date_format:H:i',
+            'end_time' => 'required|date_format:H:i|after:start_time',
+        ]);
+
+        $course = new Course();
+        $course->title = $validatedData['title'];
+        $course->description = $validatedData['description'];
+        $course->date = $validatedData['date'];
+        $course->start_time = $validatedData['start_time'];
+        $course->end_time = $validatedData['end_time'];
+        $course->save();
+
+        return redirect()->route('courses.index')->with('success', 'Corso aggiunto con successo!');
     }
 
     /**

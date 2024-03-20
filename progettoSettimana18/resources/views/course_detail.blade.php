@@ -22,8 +22,10 @@
                             </div>
                         </div>
 
+                        @if ($user && $user->is_admin == 0)
                         <p class="mt-4">Ti sei iscritto con successo. Un nostro responsabile ti confermerà la partecipazione al corso.</p>
-
+                        @endif
+                        
                         <a type="button" class="btn btn-outline-dark mt-4 w-100" href="/courses">Torna ai corsi</a>
                         <a type="button" class="btn btn-outline-warning my-2 w-100" href="/reservations">Guarda tutte le prenotazioni</a>
                     </div>

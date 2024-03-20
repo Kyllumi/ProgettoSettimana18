@@ -10,6 +10,10 @@ class Reservation extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'is_pending',
+    ];
+
     public function course(): BelongsTo {
         return $this->belongsTo(Course::class);
     }
@@ -17,4 +21,6 @@ class Reservation extends Model
     public function user(): BelongsTo {
         return $this->belongsTo(User::class);
     }
+
+
 }

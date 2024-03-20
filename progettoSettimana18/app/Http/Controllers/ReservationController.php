@@ -66,7 +66,9 @@ class ReservationController extends Controller
      */
     public function update(UpdateReservationRequest $request, Reservation $reservation)
     {
-        //
+        $reservation->update(['is_pending' => $request->input('is_pending')]);
+
+        return redirect()->back()->with('success', 'Prenotazione confermata con successo.');
     }
 
     /**

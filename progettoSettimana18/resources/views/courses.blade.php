@@ -9,6 +9,11 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+
+                    @if ($user && $user->is_admin == 1)
+                        <a class="btn btn-outline-dark my-3 w-100" href="/courses/create">Aggiungi un nuovo corso</a>
+                    @endif
+
                     <table class="table table-striped table-hover">
                     <thead class="table-light align-middle text-center">
                                 <tr>
@@ -33,7 +38,7 @@
                                                 @if ($user && $user->is_admin == 0)
                                                     <a type="button" class="btn btn-outline-warning my-2 w-100" href="/courses/{{$course->id}}">Iscriviti</a>
                                                 @else
-                                                    <a type="button" class="btn btn-outline-info my-2 w-100" href="/courses/{{$course->id}}">Dettagli</a>
+                                                    <a type="button" class="btn btn-outline-primary my-2 w-100" href="/courses/{{$course->id}}">Dettagli</a>
                                                     <a type="button" class="btn btn-outline-danger my-2 w-100" href="/courses/{{$course->id}}">Elimina</a>
                                                 @endif
                                             </td>
@@ -42,6 +47,7 @@
                                 @endif
                             </tbody>
                     </table>
+
                 </div>
             </div>
         </div>
