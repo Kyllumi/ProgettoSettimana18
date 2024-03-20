@@ -38,22 +38,16 @@ class CourseController extends Controller
      */
     public function store(StoreCourseRequest $request)
     {
-        $validatedData = $request->validate([
-            'title' => 'required|string|max:255',
-            'description' => 'required|string',
-            'date' => 'required|string',
-            'start_time' => 'required|date_format:H:i',
-            'end_time' => 'required|date_format:H:i|after:start_time',
-        ]);
+        $data = $request->only('title', 'description', 'date', 'start_time', 'end_time');
 
         $course = new Course();
-        $course->title = $validatedData['title'];
-        $course->description = $validatedData['description'];
-        $course->date = $validatedData['date'];
-        $course->start_time = $validatedData['start_time'];
-        $course->end_time = $validatedData['end_time'];
+        $course->title = $data['title'];
+        $course->description = $data['description'];
+        $course->date = $data['date'];
+        $course->start_time = $data['start_time'];
+        $course->end_time = $data['end_time'];
         $course->save();
-
+    
         return redirect()->route('courses.index')->with('success', 'Corso aggiunto con successo!');
     }
 
@@ -87,6 +81,7 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        //
+        $course->delete();
+        return redirect()->route('courses.index')->with('success', 'Corso eliminato con successo!');
     }
 }

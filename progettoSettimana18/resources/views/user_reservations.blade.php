@@ -28,7 +28,9 @@
                                     <tr>
                                         <td>{{ $reservation->course->title}}</td>
                                         <td>{{ $reservation->course->date}}</td>
-                                        <td>{{ \Carbon\Carbon::parse($reservation->course->start_time)->format('H')}}:00 - {{ \Carbon\Carbon::parse($reservation->course->end_time)->format('H')}}:00</td>
+                                        <td>{{ $reservation->course->start_time
+                                    }} - {{ $reservation->course->end_time
+                                    }}</td>
                                         @if($reservation->is_pending == 1)
                                             <td>In attesa di conferma</td>
                                         @else 

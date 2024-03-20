@@ -16,8 +16,8 @@
                                 <p class="mb-4">{{ $course->description }}</p>
                                 <ul class="list-disc list-inside mb-4">
                                     <li><strong>Giorno:</strong> {{ $course->date }}</li>
-                                    <li><strong>Orario inizio:</strong> {{ \Carbon\Carbon::parse($course->start_time)->format('H') }}:00</li>
-                                    <li><strong>Orario fine:</strong> {{ \Carbon\Carbon::parse($course->end_time)->format('H') }}:00</li>
+                                    <li><strong>Orario inizio:</strong> {{ $course->start_time }}:00</li>
+                                    <li><strong>Orario fine:</strong> {{ $course->end_time }}:00</li>
                                 </ul>
                             </div>
                         </div>

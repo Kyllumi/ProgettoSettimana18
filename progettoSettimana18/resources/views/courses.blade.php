@@ -32,14 +32,18 @@
                                             <td>{{ $course->title }}</td>
                                             <td>{{ $course->description}}</td>
                                             <td>{{ $course->date }}</td>
-                                            <td>{{ \Carbon\Carbon::parse($course->start_time)->format('H') }}:00</td>
-                                            <td>{{ \Carbon\Carbon::parse($course->end_time)->format('H') }}:00</td>
+                                            <td>{{ $course->start_time }}</td>
+                                            <td>{{ $course->end_time }}</td>
                                             <td>
                                                 @if ($user && $user->is_admin == 0)
                                                     <a type="button" class="btn btn-outline-warning my-2 w-100" href="/courses/{{$course->id}}">Iscriviti</a>
                                                 @else
                                                     <a type="button" class="btn btn-outline-primary my-2 w-100" href="/courses/{{$course->id}}">Dettagli</a>
-                                                    <a type="button" class="btn btn-outline-danger my-2 w-100" href="/courses/{{$course->id}}">Elimina</a>
+                                                    <form method="POST" action="{{ route('courses.destroy', $course->id) }}" onsubmit="return confirm('Sei sicuro di voler eliminare questo corso?');">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-outline-danger my-2 w-100">Elimina</button>
+                                                    </form>
                                                 @endif
                                             </td>
                                         </tr>

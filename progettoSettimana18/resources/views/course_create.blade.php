@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-                    <form method="post" action="{{ route('courses.store') }}" enctype="multipart/form-data">
+                    <form method="post" action="{{ route('courses.store') }}" enctype="multipart/form-data" id="courseForm">
                             @csrf
                             <div class="mb-3">
                                 <label for="title" class="form-label">Titolo Corso</label>
@@ -35,14 +35,35 @@
                                 </select>
                             </div>
 
-                            <div class="mb-3 d-flex justify-content-start">
-                                <div class="w-25">
+                            <div class="d-flex gap-3">
+                                <div class="mb-3 w-50">
                                     <label for="start_time" class="form-label">Ora di inizio</label>
-                                    <input type="time" id="start_time" name="start_time" class="form-control" required>
+                                    <select class="form-select" name="start_time" required>
+                                        <option value="12:00">12:00</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="18:00">18:00</option>
+                                        <option value="19:00">19:00</option>
+                                        <option value="20:00">20:00</option>
+                                    </select>
                                 </div>
-                                <div class="w-25 ms-3">
+
+                                <div class="mb-3 w-50">
                                     <label for="end_time" class="form-label">Ora di fine</label>
-                                    <input type="time" id="end_time" name="end_time" class="form-control" required>
+                                    <select class="form-select" name="end_time" required>
+                                        <option value="13:00">13:00</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="16:00">16:00</option>
+                                        <option value="17:00">17:00</option>
+                                        <option value="18:00">18:00</option>
+                                        <option value="19:00">19:00</option>
+                                        <option value="20:00">20:00</option>
+                                        <option value="21:00">21:00</option>
+                                    </select>
                                 </div>
                             </div>
 
@@ -55,3 +76,4 @@
         </div>
     </div>
 </x-app-layout>
+
