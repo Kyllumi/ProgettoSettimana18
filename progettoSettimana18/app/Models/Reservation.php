@@ -11,6 +11,8 @@ class Reservation extends Model
     use HasFactory;
 
     protected $fillable = [
+        'course_id',
+        'user_id',
         'is_pending',
     ];
 
