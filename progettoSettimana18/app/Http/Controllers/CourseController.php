@@ -47,7 +47,7 @@ class CourseController extends Controller
         $course->start_time = $data['start_time'];
         $course->end_time = $data['end_time'];
         $course->save();
-    
+
         return redirect()->route('courses.index')->with('success', 'Corso aggiunto con successo!');
     }
 
@@ -65,7 +65,7 @@ class CourseController extends Controller
      */
     public function edit(Course $course)
     {
-        //
+        return view('courses_update', compact('course'));
     }
 
     /**
@@ -73,7 +73,10 @@ class CourseController extends Controller
      */
     public function update(UpdateCourseRequest $request, Course $course)
     {
-        //
+        $data = $request->only('title', 'description', 'date', 'start_time', 'end_time');
+        $course->update($data);
+
+        return redirect()->route('courses.show', $course)->with('success', 'Corso aggiornato con successo!');
     }
 
     /**

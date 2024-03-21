@@ -40,6 +40,8 @@
                                                     
                                                 @else
                                                     <a type="button" class="btn btn-outline-primary my-2 w-100" href="/courses/{{$course->id}}">Dettagli</a>
+                                                    <a type="button" class="btn btn-outline-success my-2 w-100" href="/courses/{{$course->id}}/edit">Modifica</a>
+
                                                     <form method="POST" action="{{ route('courses.destroy', $course->id) }}" onsubmit="return confirm('Sei sicuro di voler eliminare questo corso?');">
                                                         @csrf
                                                         @method('DELETE')
