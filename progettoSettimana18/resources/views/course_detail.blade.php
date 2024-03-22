@@ -20,11 +20,19 @@
                                     <li><strong>Orario fine:</strong> {{ $course->end_time }}:00</li>
                                 </ul>
                             </div>
+                            </div>
+                            @if ($user && $user->is_admin == 0)
+                                <form method="post" action="{{ route('reservations.store') }}" enctype="multipart/form-data" id="reservationForm">
+                                    @csrf
+                                    <input type="hidden" name="course_id" value="{{ $course->id }}">
+                                    <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+                                    <input type="hidden" name="is_pending" value="1">
+                                    <button type="submit" class="btn btn-outline-success mt-4 w-100">Conferma iscrizione</button>
+                                </form>
+                            @endif
+                            <a type="button" class="btn btn-outline-dark mt-4 w-100" href="/courses">Torna ai corsi</a>
+                            <a type="button" class="btn btn-outline-warning my-2 w-100" href="/reservations">Guarda tutte le prenotazioni</a>
                         </div>
-                        
-                        <a type="button" class="btn btn-outline-dark mt-4 w-100" href="/courses">Torna ai corsi</a>
-                        <a type="button" class="btn btn-outline-warning my-2 w-100" href="/reservations">Guarda tutte le prenotazioni</a>
-                    </div>
             </div>
         </div>
     </div>

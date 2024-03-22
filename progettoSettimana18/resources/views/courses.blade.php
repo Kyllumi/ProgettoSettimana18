@@ -36,7 +36,7 @@
                                             <td>{{ $course->end_time }}</td>
                                             <td>
                                                 @if ($user && $user->is_admin == 0)
-                                                <a type="button" class="btn btn-outline-warning my-2 w-100" href="{{ route('reservations.create', ['course_id' => $course->id]) }}">Iscriviti</a>
+                                                <a type="button" class="btn btn-outline-warning my-2 w-100" href="/courses/{{$course->id}}" >Iscriviti</a>
                                                     
                                                 @else
                                                     <a type="button" class="btn btn-outline-primary my-2 w-100" href="/courses/{{$course->id}}">Dettagli</a>

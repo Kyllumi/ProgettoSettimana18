@@ -34,13 +34,7 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        $user = Auth::user();
-        $courses = Course::all();
-        $reservations = Reservation::where('user_id', $user->id)->get();
-
-        $course = Course::first();
-
-        return view('reservations_create', ['reservations' => $reservations, 'user' => $user, 'courses' => $courses, 'course' => $course]);
+        //
     }
 
     /**
