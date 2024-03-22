@@ -12,46 +12,46 @@
 
 
 
-                @if($reservations->count() > 0)
-                    <table class="table table-striped table-hover">
-                        <thead class="table-light align-middle text-center">
-                            <tr>
-                            <th scope="col">Corso</th>
-                            <th scope="col">Giorno</th>
-                            <th scope="col">Orario</th>
-                            <th scope="col">Stato</th>
-                            <th scope="col">Azioni</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-group-divider text-center align-middle">
-                                @foreach($reservations as $reservation)
-                                    <tr>
-                                        <td>{{ $reservation->course->title}}</td>
-                                        <td>{{ $reservation->course->date}}</td>
-                                        <td>{{ $reservation->course->start_time
-                                    }} - {{ $reservation->course->end_time
-                                    }}</td>
-                                        @if($reservation->is_pending == 1)
-                                            <td>In attesa di conferma</td>
-                                        @else 
-                                            <td>Confermata</td>
-                                        @endif
-                                        <td>
-                                            <form method="POST" action="{{ route('reservations.destroy', $reservation->id) }}" onsubmit="return confirm('Sei sicuro di voler annullare questa prenotazione?');">
+                    @if ($reservations->count() > 0)
+                        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+                            @foreach ($reservations as $reservation)
+                                <div class="col text-center">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title fw-bold">{{ $reservation->course->title }}</h5>
+                                            <p class="card-text">
+                                                <strong>Giorno:</strong> {{ $reservation->course->date }}<br>
+                                                <strong>Orario:</strong> {{ $reservation->course->start_time }} -
+                                                {{ $reservation->course->end_time }}
+                                            </p>
+                                            <p class="card-text">
+                                                @if ($reservation->is_pending == 1)
+                                                    <span class="badge bg-warning text-dark w-75 mt-2">In attesa di
+                                                        conferma</span>
+                                                @else
+                                                    <span class="badge bg-success w-75 mt-2">Confermata</span>
+                                                @endif
+                                            </p>
+                                        </div>
+                                        <div class="card-footer">
+                                            <form method="POST"
+                                                action="{{ route('reservations.destroy', $reservation->id) }}"
+                                                onsubmit="return confirm('Sei sicuro di voler annullare questa prenotazione?');">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-outline-dark my-2 w-100">Annulla</button>
+                                                <button type="submit"
+                                                    class="btn btn-outline-dark w-100">Annulla</button>
                                             </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                @else 
-                                    <p>Non ci sono prenotazioni!</p>
-                        </tbody>
-                    </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <div class="alert alert-info" role="alert">
+                            Non ci sono prenotazioni!
+                        </div>
                     @endif
-
-                
 
 
 

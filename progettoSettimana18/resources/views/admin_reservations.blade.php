@@ -12,59 +12,68 @@
 
 
 
-                @if($reservations->count() > 0)
-                    <table class="table table-striped table-hover">
-                        <thead class="table-light align-middle text-center">
-                            <tr>
-                            <th scope="col">ID</th>
-                            <th scope="col">Titolo Corso</th>
-                            <th scope="col">Utente</th>
-                            <th scope="col">Stato</th>
-                            <th scope="col">Azioni</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-group-divider text-center align-middle">
-                                @foreach($reservations as $reservation)
+                    @if ($reservations->count() > 0)
+                        <table class="table table-striped table-hover">
+                            <thead class="table-light align-middle text-center">
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Titolo Corso</th>
+                                    <th scope="col">Utente</th>
+                                    <th scope="col">Stato</th>
+                                    <th scope="col">Azioni</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-group-divider text-center align-middle">
+                                @foreach ($reservations as $reservation)
                                     <tr>
                                         <td>{{ $reservation->id }}</td>
-                                        <td>{{ $reservation->course->title}}</td>
+                                        <td>{{ $reservation->course->title }}</td>
                                         <td>{{ $reservation->user->name }}</td>
-                                        @if($reservation->is_pending == 1)
+                                        @if ($reservation->is_pending == 1)
                                             <td>In attesa di conferma</td>
-                                        @else 
+                                        @else
                                             <td>Confermata</td>
                                         @endif
                                         <td>
-                                            @if($reservation->is_pending == 1)
-                                            <form method="POST" action="{{ route('reservations.update', $reservation->id) }}" onsubmit="return confirm('Confermare questa prenotazione?');">
-                                                @csrf
-                                                @method('PUT')
-                                                <input type="hidden" name="is_pending" value="0">
-                                                <button type="submit" class="btn btn-outline-success my-2 w-100">Conferma</button>
-                                            </form>
-                                            @else 
-                                            <form method="POST" action="{{ route('reservations.update', $reservation->id) }}" onsubmit="return confirm('Annullare questa prenotazione?');">
-                                                @csrf
-                                                @method('PUT')
-                                                <input type="hidden" name="is_pending" value="1">
-                                                <button type="submit" class="btn btn-outline-dark my-2 w-100">Annulla</button>
-                                            </form>
+                                            @if ($reservation->is_pending == 1)
+                                                <form method="POST"
+                                                    action="{{ route('reservations.update', $reservation->id) }}"
+                                                    onsubmit="return confirm('Confermare questa prenotazione?');">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <input type="hidden" name="is_pending" value="0">
+                                                    <button type="submit"
+                                                        class="btn btn-outline-success my-2 w-100">Conferma</button>
+                                                </form>
+                                            @else
+                                                <form method="POST"
+                                                    action="{{ route('reservations.update', $reservation->id) }}"
+                                                    onsubmit="return confirm('Annullare questa prenotazione?');">
+                                                    @csrf
+                                                    @method('PUT')
+                                                    <input type="hidden" name="is_pending" value="1">
+                                                    <button type="submit"
+                                                        class="btn btn-outline-dark my-2 w-100">Annulla</button>
+                                                </form>
                                             @endif
-                                            <form method="POST" action="{{ route('reservations.destroy', $reservation->id) }}" onsubmit="return confirm('Sei sicuro di voler eliminare questa prenotazione?');">
+                                            <form method="POST"
+                                                action="{{ route('reservations.destroy', $reservation->id) }}"
+                                                onsubmit="return confirm('Sei sicuro di voler eliminare questa prenotazione?');">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-outline-danger my-2 w-100">Elimina</button>
+                                                <button type="submit"
+                                                    class="btn btn-outline-danger my-2 w-100">Elimina</button>
                                             </form>
                                         </td>
                                     </tr>
                                 @endforeach
-                                @else 
-                                    <p>Non ci sono prenotazioni!</p>
-                        </tbody>
-                    </table>
+                            @else
+                                <p>Non ci sono prenotazioni!</p>
+                            </tbody>
+                        </table>
                     @endif
 
-                
+
 
 
 
